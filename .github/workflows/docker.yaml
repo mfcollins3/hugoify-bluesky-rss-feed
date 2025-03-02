@@ -40,15 +40,5 @@ jobs:
     steps:
       - name: Check out source code
         uses: actions/checkout@v4
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: go.mod
-      - name: Build blueskyrss
-        run: go build -o blueskyrss ./cmd/blueskyrss/main.go
-        env:
-          CGO_ENABLED: 0
-          GOOS: linux
-          GOARCH: amd64
       - name: Build Docker image
         run: docker build -t hugoify-bluesky-rss-feed:latest .

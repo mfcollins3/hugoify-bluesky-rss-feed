@@ -20,10 +20,8 @@
 
 .devcontainer/
 .github/
-cmd/
 .dockerignore
 .gitignore
 Dockerfile
-go.mod
 LICENSE.md
 rss.xml

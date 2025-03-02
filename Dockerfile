@@ -18,10 +18,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+FROM golang:1.24.0-bookworm AS build
+
+WORKDIR /go/src/github.com/mfcollins3/hugoify-bluesky-rss-feed
+COPY . .
+RUN CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64 \
+    go build -v -o /opt/blueskyrss/bin/blueskyrss ./cmd/blueskyrss/main.go
+
 FROM alpine:3.21.3
 
 WORKDIR /opt/blueskyrss
 
-COPY blueskyrss bin/
+COPY --from=build /opt/blueskyrss/bin/blueskyrss bin/
 
 ENTRYPOINT ["/opt/blueskyrss/bin/blueskyrss"]
