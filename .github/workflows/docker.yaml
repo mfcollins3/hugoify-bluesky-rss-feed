@@ -45,7 +45,7 @@ jobs:
         with:
           go-version-file: go.mod
       - name: Build blueskyrss
-        run: go build -o blueskyrss cmd/blueskyrss/main.go
+        run: go build -o blueskyrss ./cmd/blueskyrss/main.go
         env:
           CGO_ENABLED: 0
           GOOS: linux
